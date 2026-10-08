@@ -1,0 +1,30 @@
+[project]
+name = "editbench"
+version = "0.1.0"
+description = "EditBench-3Way: weight editing (ROME/MEMIT) vs retrieval vs knowledge-graph lookup on the same facts, model and metrics, with ripple effects"
+requires-python = ">=3.10"
+dependencies = [
+  "numpy>=1.26",
+  "scipy>=1.11",
+  "scikit-learn>=1.3",
+  "networkx>=3.0",
+  "datasets>=2.16.0",
+  "pyarrow>=14.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+gpu = [
+  "torch>=2.1.0",
+  "transformers>=4.36.0",
+  "accelerate>=0.25.0",
+  "faiss-cpu>=1.8.0",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = "--tb=short"

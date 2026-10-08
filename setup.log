@@ -1,0 +1,10 @@
+[21:35:05] venv start
+[21:40:58] venv done: 0
+[21:40:58] EasyEdit start
+ERROR: git+https://github.com/zjunlp/EasyEdit does not appear to be a Python project: neither 'setup.py' nor 'pyproject.toml' found.
+[21:41:10] EasyEdit done: 1
+[21:41:10] model download start
+Fetching 10 files:   0%|          | 0/10 [00:00<?, ?it/s]Fetching 10 files:  10%|█         | 1/10 [00:00<00:07,  1.19it/s]Fetching 10 files:  40%|████      | 4/10 [00:00<00:01,  5.33it/s]Fetching 10 files:  70%|███████   | 7/10 [00:01<00:00,  7.56it/s]Fetching 10 files:  90%|█████████ | 9/10 [00:01<00:00,  5.46it/s]Fetching 10 files:  90%|█████████ | 9/10 [00:20<00:00,  5.46it/s]Fetching 10 files: 100%|██████████| 10/10 [03:51<00:00, 44.78s/it]Fetching 10 files: 100%|██████████| 10/10 [03:51<00:00, 23.11s/it]
+[21:45:02] model done: 0
+[21:45:02] datasets start
+[21:45:20] datasets done

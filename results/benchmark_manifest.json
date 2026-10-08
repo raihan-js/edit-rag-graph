@@ -1,0 +1,11 @@
+{
+ "seed": 20261008,
+ "cap_per_family": 500,
+ "n": 1500,
+ "sha256": "df85f8566b1a706ce2dcf951400fbcf063c369c791eb58b7068d7be01ab0f033",
+ "families": {
+  "counterfact": 500,
+  "mquake-cf": 500,
+  "rippleedits": 500
+ }
+}
