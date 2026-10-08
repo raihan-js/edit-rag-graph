@@ -1,5 +1,5 @@
-# Run status (2026-10-09 00:40)
+# Run status (2026-10-09 01:56)
 
-- armB: pending
-- armC: pending
-- armA: pending
+- armB: done
+- armC: done
+- armA: running

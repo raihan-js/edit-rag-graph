@@ -1,0 +1,20 @@
+{
+ "seconds": 4275.1,
+ "peak_vram_gb": 3.11,
+ "covered": {
+  "hold": 0.3208,
+  "gen": 0.6273,
+  "loc": 0.3693,
+  "n_hold": 1222,
+  "n_gen": 1500,
+  "n_loc": 1852
+ },
+ "uncovered": {
+  "hold": 0.0108,
+  "gen": 0.0,
+  "loc": 0.0948,
+  "n_hold": 278,
+  "n_gen": 0,
+  "n_loc": 2595
+ }
+}
