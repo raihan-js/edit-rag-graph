@@ -1,0 +1,80 @@
+{
+ "n": 12,
+ "seconds": 8.3,
+ "peak_vram_gb": 3.1,
+ "rows": [
+  {
+   "edit_id": "counterfact-13562",
+   "prompt": "soccer",
+   "completion": " = ['Brazil', 'Argentina', 'England', 'Germany']\nprint(soccer)\nprint(len(soccer))\nprint('Russia' in soccer)\n\n# append\n",
+   "chars": 118
+  },
+  {
+   "edit_id": "counterfact-16673",
+   "prompt": "Germany",
+   "completion": "'s Federal Constitutional Court has ruled that the country must allow same-sex couples to marry. The court said it was unconstitutional for Germany not to recognize same-sex marriages,",
+   "chars": 184
+  },
+  {
+   "edit_id": "counterfact-8537",
+   "prompt": "Tamil",
+   "completion": " Nadu Board of Secondary EducationSSLC (English Medium) Class 9th\n\n# If the sum of first n terms of an A.P. is given by",
+   "chars": 119
+  },
+  {
+   "edit_id": "counterfact-3951",
+   "prompt": "Australia",
+   "completion": "'s largest and most comprehensive online directory of free resources for teachers, students, parents and carers.\nThe Australian Curriculum: English is a set of learning areas that",
+   "chars": 179
+  },
+  {
+   "edit_id": "mquake-cf-2738-0",
+   "prompt": "What is the capital of the country whose citizen was the CEO of the company that developed the Classic Mac OS?",
+   "completion": " The answer to this question is a state in which the US flag has 13 stripes. What is it?\nThe capital of the United States, where the",
+   "chars": 132
+  },
+  {
+   "edit_id": "mquake-cf-347-1",
+   "prompt": "What language was spoken, written or signed by the author of \"Tao Te Ching\"?",
+   "completion": " The Tao Te Ching is a philosophical text attributed to Laozi (also known as Lao Tzu), an ancient Chinese philosopher and religious leader who lived",
+   "chars": 148
+  },
+  {
+   "edit_id": "mquake-cf-1906-0",
+   "prompt": "Who is the head of state of the country where the Dasarath Rangasala Stadium's sport originated?",
+   "completion": " The Dasarath Rangasala Stadium, also known as the Rajiv Gandhi International Cricket Stadium, is located in Bangalore, India. It was built to",
+   "chars": 142
+  },
+  {
+   "edit_id": "mquake-cf-2640-1",
+   "prompt": "What is the official language of the country of citizenship of the creator of Homer Simpson's spouse?",
+   "completion": " The answer to this question is a common misconception. While it is true that Homer Simpson's spouse, Lisa, was born in Japan and speaks Japanese at home,",
+   "chars": 154
+  },
+  {
+   "edit_id": "rippleedits-recent-0273",
+   "prompt": "The gender of the editor of Bangladesher Swadhinata Yuddha Dalilpatra is",
+   "completion": ":\nA. Male\nB. Female\n\nTo determine the gender of the editor of Bangladesher Swadhinata Yuddha Dalilpatra",
+   "chars": 103
+  },
+  {
+   "edit_id": "rippleedits-recent-0738",
+   "prompt": "The name of the country which the architect of LVM-Campus is associated with is",
+   "completion": " ____\nA. United States\nB. Germany\nC. France\nD. Italy\nAnswer:\nD\n\nWhich of the following statements about the characteristics of",
+   "chars": 126
+  },
+  {
+   "edit_id": "rippleedits-random-0656",
+   "prompt": "The gender of the author of Leptin resistance and obesity is",
+   "completion": " ____\nA. Male\nB. Female\nC. Both male and female\nD. Unable to determine\nAnswer:\nMale\n\nWhich of the following statements",
+   "chars": 118
+  },
+  {
+   "edit_id": "rippleedits-popular-0011",
+   "prompt": "Is Julius Hoffman still alive?",
+   "completion": " If so, how is he doing?\nWhat are the most important things to know about Julius Hoffman?\n\nMulti-choice problem: Are these two questions inquiring about the",
+   "chars": 156
+  }
+ ],
+ "ts": "2026-10-08T22:16:34"
+}

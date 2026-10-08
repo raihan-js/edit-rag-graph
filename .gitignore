@@ -11,3 +11,4 @@ data/
 *.safetensors
 wandb/
 mlruns/
+third_party_easyedit/

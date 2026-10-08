@@ -17,3 +17,12 @@ Hold rate (edited fact answered with the new object), paraphrase generalization,
 ## Layout
 
 `src/editbench/{datasets,methods,evaluate}` · `scripts/` (fetch, run, report) · `tests/` · `results/` (committed JSON, never overwritten) · `data/` (gitignored raw downloads).
+
+## Setup (EasyEdit vendored, not tracked)
+
+```bash
+git clone --depth 1 https://github.com/zjunlp/EasyEdit third_party_easyedit
+.venv/bin/pip install hydra-core higher sentence-transformers nltk
+```
+
+Qwen2.5 hparams ship upstream (`hparams/ROME/qwen2.5-7b.yaml`, same family as our 1.5B model).
