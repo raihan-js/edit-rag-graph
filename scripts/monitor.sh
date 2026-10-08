@@ -12,7 +12,7 @@ gpu_free() { ! pgrep -f "run_arm[ABC].py" >/dev/null; }
 status() { printf "# Run status (%s)\n\n- armB: %s\n- armC: %s\n- armA: %s\n" \
   "$(date '+%Y-%m-%d %H:%M')" "$1" "$2" "$3" > results/STATUS.md; }
 
-armB done=false; armC=pending; armA=pending; hold=pending
+armB=pending; armC=pending; armA=pending; hold=pending
 [ -f results/armB.json ] && armB=done
 status "$armB" "$armC" "$armA"
 log "monitor started (armB=$armB)"
