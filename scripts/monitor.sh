@@ -37,6 +37,12 @@ while true; do
   fi
   if [ "$armA" = running ] && grep -q '"memit": {' results/armA.json 2>/dev/null && gpu_free; then
     armA=done; status "$armB" "$armC" "$armA"
+    if grep -q hold_probe_fix results/armB.json 2>/dev/null; then
+      log "hold patch already applied -> committing everything"
+      git add -A && git commit -qm "Arm results + hold-probe patch (autonomous monitor)" || true
+      log "ALL DONE"
+      exit 0
+    fi
     log "armA finished -> hold-probe patch (base model only)"
     setsid nohup .venv/bin/python scripts/rehold.py > /tmp/rehold.log 2>&1 < /dev/null &
     hold=running; status "$armB $armC $armA hold:$hold"
