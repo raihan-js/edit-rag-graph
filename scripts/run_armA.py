@@ -118,47 +118,7 @@ def main():
     print(f"ROME done: {out['rome']} in {out['rome_edit_seconds']}s", flush=True)
     out["memit"] = None
     (ROOT / "results" / "armA.json").write_text(json.dumps(out, indent=1))
-    # MEMIT: two cumulative batches of 100 from the main table, then score recs150.
-    # Free the ROME editor first: two fp16 1.5B models + MEMIT batch caches do not fit 12 GB.
-    import gc as _gc
-    del editor
-    _gc.collect()
-    import torch as _tc
-    _tc.cuda.empty_cache()
-    from easyeditor import BaseEditor as _BE  # noqa: F401  (same class, new hparams)
-    memit = _BE.from_hparams(MEMITHyperParams.from_hparams(MEMIT_HPARAMS))
-    import torch as _tt
-    _lm, _emb = memit.model.lm_head.weight, memit.model.model.embed_tokens.weight
-    if _lm is _emb:  # Qwen ties them; MEMIT needs a separate lm_head parameter
-        memit.model.lm_head.weight = _tt.nn.Parameter(_lm.detach().clone())
-        print("untied lm_head for MEMIT", flush=True)
-    batch_recs = [r for r in recs if r["new_object"]][:200]
-    t1 = time.time()
-    for b in (batch_recs[:100], batch_recs[100:]):
-        reqs = [{"prompt": f"{r['subject']} {r['relation']}",
-                 "target_new": r["new_object"] or "",
-                 "ground_truth": r["old_object"] or "",
-                 "subject": r["subject"], "portability": {}, "locality": {}}
-                for r in b]
-        memit.apply_algo(memit.model, memit.tok, reqs, memit.hparams,
-                         copy=False, return_orig_weights=False)
-        print(f"MEMIT batch done ({len(reqs)} edits)", flush=True)
-    out["memit_edit_seconds"] = round(time.time() - t1, 1)
-    agg = [0, 0, 0]
-    tot = [0, 0, 0]
-    overlap = 0
-    batch_ids = {r["edit_id"] for r in batch_recs}
-    for r in recs150:
-        overlap += r["edit_id"] in batch_ids
-        (h, g, lo), (nh, ng, nl) = score_one(memit, r)
-        agg[0] += h; agg[1] += g; agg[2] += lo
-        tot[0] += nh; tot[1] += ng; tot[2] += nl
-    out["memit"] = {"hold": agg[0] / max(tot[0], 1), "gen": agg[1] / max(tot[1], 1),
-                    "loc": agg[2] / max(tot[2], 1), "n_hold": tot[0],
-                    "n_gen": tot[1], "n_loc": tot[2],
-                    "eval_overlap_with_batches": overlap}
-    (ROOT / "results" / "armA.json").write_text(json.dumps(out, indent=1))
-    print(f"ALL DONE. ROME: {out['rome']} MEMIT: {out['memit']}")
+    print("ROME phase complete; MEMIT runs separately (scripts/run_armA_memit.py).")
 
 
 if __name__ == "__main__":

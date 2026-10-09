@@ -30,6 +30,11 @@ while true; do
     setsid nohup .venv/bin/python scripts/run_armA.py > /tmp/armA.log 2>&1 < /dev/null &
     armA=running; status "$armB" "$armC" "$armA"
   fi
+  if [ "$armA" = running ] && grep -q '"memit": null' results/armA.json 2>/dev/null && gpu_free \
+     && ! pgrep -f "run_armA" >/dev/null; then
+    log "ROME done -> launching MEMIT (fresh process)"
+    setsid nohup .venv/bin/python scripts/run_armA_memit.py > /tmp/armA_memit.log 2>&1 < /dev/null &
+  fi
   if [ "$armA" = running ] && grep -q '"memit": {' results/armA.json 2>/dev/null && gpu_free; then
     armA=done; status "$armB" "$armC" "$armA"
     log "armA finished -> hold-probe patch (base model only)"
