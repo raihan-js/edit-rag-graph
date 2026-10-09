@@ -119,6 +119,12 @@ def main():
     out["memit"] = None
     (ROOT / "results" / "armA.json").write_text(json.dumps(out, indent=1))
     # MEMIT: two cumulative batches of 100 from the main table, then score recs150.
+    # Free the ROME editor first: two fp16 1.5B models + MEMIT batch caches do not fit 12 GB.
+    import gc as _gc
+    del editor
+    _gc.collect()
+    import torch as _tc
+    _tc.cuda.empty_cache()
     from easyeditor import BaseEditor as _BE  # noqa: F401  (same class, new hparams)
     memit = _BE.from_hparams(MEMITHyperParams.from_hparams(MEMIT_HPARAMS))
     import torch as _tt
