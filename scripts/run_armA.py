@@ -71,10 +71,26 @@ def main():
     recs150 = slice_150(recs)
     out = {"slice_n": len(recs150)}
     editor = BaseEditor.from_hparams(ROMEHyperParams.from_hparams(ROME_HPARAMS))
+    import torch as _torch
+    partial = ROOT / "results" / "armA_rome_partial.jsonl"
+    done_ids = set()
     agg = [0, 0, 0]
     tot = [0, 0, 0]
+    if partial.exists():
+        for line in open(partial, encoding="utf-8"):
+            try:
+                e = json.loads(line)
+            except ValueError:
+                continue
+            done_ids.add(e["edit_id"])
+            agg[0] += e["s"][0]; agg[1] += e["s"][1]; agg[2] += e["s"][2]
+            tot[0] += e["n"][0]; tot[1] += e["n"][1]; tot[2] += e["n"][2]
+    print(f"resuming ROME: {len(done_ids)} already scored", flush=True)
     t0 = time.time()
+    part_out = open(partial, "a", encoding="utf-8")
     for i, r in enumerate(recs150):
+        if r["edit_id"] in done_ids:
+            continue
         req = {"prompt": f"{r['subject']} {r['relation']}",
                "target_new": r["new_object"] or "",
                "ground_truth": r["old_object"] or "",
@@ -86,6 +102,13 @@ def main():
         agg[0] += h; agg[1] += g; agg[2] += lo
         tot[0] += nh; tot[1] += ng; tot[2] += nl
         restore_after_edit(editor, edited_model, weights_copy)
+        del edited_model, weights_copy
+        _torch.cuda.empty_cache()
+        if r["edit_id"] not in done_ids:
+            part_out.write(json.dumps({"edit_id": r["edit_id"], "s": [h, g, lo],
+                                       "n": [nh, ng, nl]}) + "\n")
+            part_out.flush()
+            done_ids.add(r["edit_id"])
         if (i + 1) % 25 == 0:
             print(f"ROME {i + 1}/{len(recs150)}", flush=True)
     out["rome_edit_seconds"] = round(time.time() - t0, 1)
