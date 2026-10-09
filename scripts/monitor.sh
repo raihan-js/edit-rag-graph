@@ -30,7 +30,7 @@ while true; do
     setsid nohup .venv/bin/python scripts/run_armA.py > /tmp/armA.log 2>&1 < /dev/null &
     armA=running; status "$armB" "$armC" "$armA"
   fi
-  if [ "$armA" = running ] && [ -f results/armA.json ] && gpu_free; then
+  if [ "$armA" = running ] && grep -q '"memit": {' results/armA.json 2>/dev/null && gpu_free; then
     armA=done; status "$armB" "$armC" "$armA"
     log "armA finished -> hold-probe patch (base model only)"
     setsid nohup .venv/bin/python scripts/rehold.py > /tmp/rehold.log 2>&1 < /dev/null &

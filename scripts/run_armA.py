@@ -116,9 +116,16 @@ def main():
                    "loc": agg[2] / max(tot[2], 1), "n_hold": tot[0],
                    "n_gen": tot[1], "n_loc": tot[2]}
     print(f"ROME done: {out['rome']} in {out['rome_edit_seconds']}s", flush=True)
+    out["memit"] = None
+    (ROOT / "results" / "armA.json").write_text(json.dumps(out, indent=1))
     # MEMIT: two cumulative batches of 100 from the main table, then score recs150.
     from easyeditor import BaseEditor as _BE  # noqa: F401  (same class, new hparams)
     memit = _BE.from_hparams(MEMITHyperParams.from_hparams(MEMIT_HPARAMS))
+    import torch as _tt
+    _lm, _emb = memit.model.lm_head.weight, memit.model.model.embed_tokens.weight
+    if _lm is _emb:  # Qwen ties them; MEMIT needs a separate lm_head parameter
+        memit.model.lm_head.weight = _tt.nn.Parameter(_lm.detach().clone())
+        print("untied lm_head for MEMIT", flush=True)
     batch_recs = [r for r in recs if r["new_object"]][:200]
     t1 = time.time()
     for b in (batch_recs[:100], batch_recs[100:]):
