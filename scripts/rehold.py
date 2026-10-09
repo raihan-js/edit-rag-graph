@@ -35,7 +35,7 @@ def derive(recs):
         p = ROOT / "data" / "raw" / "RippleEdits" / "data" / "benchmark" / f"{name}.json"
         if not p.exists():
             continue
-        for i, e in enumerate(json.loads(open(p, encoding="utf-8"))):
+        for i, e in enumerate(json.loads(open(p, encoding="utf-8").read())):
             orig = (e.get("edit", {}).get("original_fact") or {}).get("prompt", "")
             # Copula prompts: cut the old object after the last " is ".
             if " is " in orig:
@@ -47,8 +47,8 @@ def derive(recs):
 
 
 def main():
-    arm = json.loads(open(ROOT / "results" / "armB.json", encoding="utf-8"))
-    recs = [json.loads(l) for l in open(ROOT / "results" / "benchmark_main.jsonl", encoding="utf-8")]
+    arm = json.loads((ROOT / "results" / "armB.json").read_text(encoding="utf-8"))
+    recs = [json.loads(l) for l in (ROOT / "results" / "benchmark_main.jsonl").read_text(encoding="utf-8").splitlines() if l.strip()]
     probes = derive(recs)
     model, tok = load_model()
     enc, index = build_index(recs)
