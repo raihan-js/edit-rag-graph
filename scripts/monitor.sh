@@ -23,7 +23,7 @@ log "monitor started (memit=$memit hold=$hold)"
 while true; do
   if [ "$memit" = pending ] && ! running "run_armA_memit" && ! running "run_armA\.py"; then
     log "launching MEMIT (fresh process)"
-    setsid nohup .venv/bin/python scripts/run_armA_memit.py > /tmp/armA_memit.log 2>&1 < /dev/null &
+    setsid nohup env PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True .venv/bin/python scripts/run_armA_memit.py > /tmp/armA_memit.log 2>&1 < /dev/null &
     memit=running
     status "$memit" "$hold"
   fi
