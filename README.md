@@ -14,6 +14,25 @@ Status: milestone 1 (unified benchmark). Pre-registration: `docs/PREREGISTRATION
 
 Hold rate (edited fact answered with the new object), paraphrase generalization, ripple-through (multi-hop questions needing the edit), locality (unrelated facts unchanged), cost (seconds + peak VRAM at 10/100/1,000 edits).
 
+## Results (main table, n=1,500; alias-match rates, Wilson 95% CI)
+
+| Arm | Hold | Generalization | Locality |
+|---|---|---|---|
+| B-oracle (gold fact in prompt) | 0.226 [0.204, 0.251] | 0.527 [0.501, 0.552] | 0.287 [0.274, 0.300] |
+| B-real (top-1 retrieved, hit rate 0.795) | 0.193 | 0.455 [0.430, 0.481] | 0.285 [0.272, 0.299] |
+| C-covered (graph has the relation, 76%) | 0.321 | **0.627 [0.603, 0.651]** | **0.369 [0.348, 0.392]** |
+| C-uncovered | 0.011 | — (no gen probes uncovered) | 0.095 [0.084, 0.107] |
+| A-ROME (150 singles) | 0.753* | 0.707 [0.629, 0.774] | **0.144 [0.115, 0.180] ⚠** |
+| A-MEMIT (2×100 batches) | 0.327* | 0.553 [0.473, 0.631] | **0.124 [0.097, 0.158] ⚠** |
+
+\* A-hold uses the original probes (subject + relation ID); B/C hold uses the fixed probes. Not directly comparable — see the probe note below.
+
+Verdicts: **H1 FAILS** — even the gold fact in context is answered 22.6% of the time; a 1.5B model does not reliably defer to context (this bounds every in-context method, including B). **H2**: C-covered leads B-oracle with non-overlapping intervals, only where covered. **H3 FLAGGED**: both weight-editing arms below 80% locality; non-editing arms hold 29–37%. **H4**: ROME's per-edit tracing dominates at scale (see `results/cost.json`).
+
+Probe note (recorded, not tuning): the first hold probes were garbage for CounterFact/MQuAKE (`"subject P103"`, multi-hop as single-hop). Fixed probes (filled template, rewrite question, original-minus-object) re-ran for B-oracle/B-real; A keeps original probes. Both versions are in `results/` (`armB.json` carries before/after).
+
+CI note: pre-registered paired bootstrap needs per-item joint outcomes, which v1 runs did not log. All verdicts are far from every boundary, so Wilson + independent intervals decide nothing differently. Paired re-runs queued as v1.1 rigor, not claims.
+
 ## Layout
 
 `src/editbench/{datasets,methods,evaluate}` · `scripts/` (fetch, run, report) · `tests/` · `results/` (committed JSON, never overwritten) · `data/` (gitignored raw downloads).
