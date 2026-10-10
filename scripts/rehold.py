@@ -23,7 +23,7 @@ ROOT = Path(__file__).resolve().parent.parent
 
 def derive(recs):
     cf, mq, rp = {}, {}, {}
-    for r in [json.loads(l) for l in open(ROOT / "data" / "raw" / "counterfact.json", encoding="utf-8")]:
+    for r in json.loads((ROOT / "data" / "raw" / "counterfact.json").read_text(encoding="utf-8")):
         rw = r.get("requested_rewrite", {})
         if rw.get("subject") and rw.get("prompt", "").count("{}") == 1:
             cf[f"counterfact-{r.get('case_id', '?')}"] = rw["prompt"].replace("{}", rw["subject"])

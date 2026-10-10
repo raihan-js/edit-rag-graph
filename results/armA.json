@@ -9,5 +9,14 @@
   "n_gen": 150,
   "n_loc": 451
  },
- "memit": null
+ "memit": {
+  "hold": 0.32666666666666666,
+  "gen": 0.5533333333333333,
+  "loc": 0.12416851441241686,
+  "n_hold": 150,
+  "n_gen": 150,
+  "n_loc": 451,
+  "eval_overlap_with_batches": 50
+ },
+ "memit_edit_seconds": 59545.2
 }
