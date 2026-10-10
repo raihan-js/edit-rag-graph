@@ -1,0 +1,8 @@
+{
+ "rag_retrieve_100_s": 0.49,
+ "graph_compile_100_s": 0.0,
+ "gen_100_s": 63.14,
+ "peak_vram_gb": 3.25,
+ "rome_10_s": 36.95,
+ "memit_10_s": 85.5
+}

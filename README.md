@@ -27,7 +27,7 @@ Hold rate (edited fact answered with the new object), paraphrase generalization,
 
 \* A-hold uses the original probes (subject + relation ID); B/C hold uses the fixed probes. Not directly comparable — see the probe note below.
 
-Verdicts: **H1 FAILS** — even the gold fact in context is answered 22.6% of the time; a 1.5B model does not reliably defer to context (this bounds every in-context method, including B). **H2**: C-covered leads B-oracle with non-overlapping intervals, only where covered. **H3 FLAGGED**: both weight-editing arms below 80% locality; non-editing arms hold 29–37%. **H4**: ROME's per-edit tracing dominates at scale (see `results/cost.json`).
+Verdicts: **H1 FAILS** — even the gold fact in context is answered 22.6% of the time; a 1.5B model does not reliably defer to context (this bounds every in-context method, including B). **H2**: C-covered leads B-oracle with non-overlapping intervals, only where covered. **H3 FLAGGED**: both weight-editing arms below 80% locality; non-editing arms hold 29–37%. **H4 (measured, `results/cost.json`)**: per query, retrieval adds 0.005s and graph compile ~0s over 0.63s generation (3.25 GB peak); per edit, ROME 3.7s and MEMIT 8.5s (×10 timed rows) — linear extrapolations give ROME ~6 min / ~62 min and MEMIT ~14 min / ~2.4 h at 100 / 1,000 edits, plus MEMIT's one-time ~7 h stats build on first run.
 
 Probe note (recorded, not tuning): the first hold probes were garbage for CounterFact/MQuAKE (`"subject P103"`, multi-hop as single-hop). Fixed probes (filled template, rewrite question, original-minus-object) re-ran for B-oracle/B-real; A keeps original probes. Both versions are in `results/` (`armB.json` carries before/after).
 
