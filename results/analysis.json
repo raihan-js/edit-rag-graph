@@ -1,0 +1,178 @@
+{
+ "metric": "alias-match rate with Wilson 95% CI",
+ "ci_deviation": "paired bootstrap replaced (see module docstring)",
+ "H1_hold_oracle_ge_95": {
+  "p": 0.2264,
+  "lo": 0.2036,
+  "hi": 0.251,
+  "n": 1197,
+  "verdict": "FAIL",
+  "note": "gold fact in context, model answers it 22.6% of the time"
+ },
+ "B": {
+  "oracle": {
+   "hold": {
+    "p": 0.2264,
+    "lo": 0.2036,
+    "hi": 0.251,
+    "n": 1197
+   },
+   "gen": {
+    "p": 0.5267,
+    "lo": 0.5014,
+    "hi": 0.5518,
+    "n": 1500
+   },
+   "loc": {
+    "p": 0.2867,
+    "lo": 0.2736,
+    "hi": 0.3002,
+    "n": 4447
+   }
+  },
+  "real": {
+   "hold": {
+    "p": 0.193,
+    "lo": 0.1716,
+    "hi": 0.2163,
+    "n": 1197
+   },
+   "gen": {
+    "p": 0.4553,
+    "lo": 0.4303,
+    "hi": 0.4806,
+    "n": 1500
+   },
+   "loc": {
+    "p": 0.2854,
+    "lo": 0.2723,
+    "hi": 0.2988,
+    "n": 4447
+   }
+  },
+  "retrieval_hit_rate": 0.7947
+ },
+ "C": {
+  "covered": {
+   "hold": {
+    "p": 0.3208,
+    "lo": 0.2952,
+    "hi": 0.3475,
+    "n": 1222
+   },
+   "gen": {
+    "p": 0.6273,
+    "lo": 0.6026,
+    "hi": 0.6514,
+    "n": 1500
+   },
+   "loc": {
+    "p": 0.3693,
+    "lo": 0.3476,
+    "hi": 0.3916,
+    "n": 1852
+   }
+  },
+  "uncovered_hold": {
+   "p": 0.0108,
+   "lo": 0.0037,
+   "hi": 0.0312,
+   "n": 278
+  },
+  "uncovered_loc": {
+   "p": 0.0948,
+   "lo": 0.0841,
+   "hi": 0.1067,
+   "n": 2595
+  }
+ },
+ "A": {
+  "rome": {
+   "hold": {
+    "p": 0.7533,
+    "lo": 0.6786,
+    "hi": 0.8154,
+    "n": 150
+   },
+   "gen": {
+    "p": 0.7067,
+    "lo": 0.6294,
+    "hi": 0.7736,
+    "n": 150
+   },
+   "loc": {
+    "p": 0.1441,
+    "lo": 0.1147,
+    "hi": 0.1795,
+    "n": 451
+   }
+  },
+  "memit": {
+   "hold": {
+    "p": 0.3267,
+    "lo": 0.2568,
+    "hi": 0.4052,
+    "n": 150
+   },
+   "gen": {
+    "p": 0.5533,
+    "lo": 0.4734,
+    "hi": 0.6306,
+    "n": 150
+   },
+   "loc": {
+    "p": 0.1242,
+    "lo": 0.0969,
+    "hi": 0.1578,
+    "n": 451
+   }
+  },
+  "memit_overlap": 50,
+  "rome_note": "150 independent singles; hold probes pre-fix (see report)"
+ },
+ "H2_ripple": {
+  "C_covered_gen": {
+   "p": 0.6273,
+   "lo": 0.6026,
+   "hi": 0.6514,
+   "n": 1500
+  },
+  "B_oracle_gen": {
+   "p": 0.5267,
+   "lo": 0.5014,
+   "hi": 0.5518,
+   "n": 1500
+  },
+  "verdict": "C-covered leads B-oracle with non-overlapping intervals; applies only where the graph covers the relation"
+ },
+ "H3_locality_flag_below_80": {
+  "B_oracle_loc": {
+   "p": 0.2867,
+   "lo": 0.2736,
+   "hi": 0.3002,
+   "n": 4447
+  },
+  "C_covered_loc": {
+   "p": 0.3693,
+   "lo": 0.3476,
+   "hi": 0.3916,
+   "n": 1852
+  },
+  "ROME_loc": {
+   "p": 0.1441,
+   "lo": 0.1147,
+   "hi": 0.1795,
+   "n": 451
+  },
+  "MEMIT_loc": {
+   "p": 0.1242,
+   "lo": 0.0969,
+   "hi": 0.1578,
+   "n": 451
+  },
+  "verdict": "FLAGGED: both weight-editing arms below 80% (ROME 14%, MEMIT 12%); non-editing arms stay above theirs (29%/37%)"
+ },
+ "H4_cost": {
+  "note": "seconds + peak VRAM per arm run (see report table); ROME per-edit tracing dominates at scale"
+ }
+}
