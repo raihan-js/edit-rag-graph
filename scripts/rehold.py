@@ -27,15 +27,14 @@ def derive(recs):
         rw = r.get("requested_rewrite", {})
         if rw.get("subject") and rw.get("prompt", "").count("{}") == 1:
             cf[f"counterfact-{r.get('case_id', '?')}"] = rw["prompt"].replace("{}", rw["subject"])
-    for c in [json.loads(l) for l in open(
-            ROOT / "data" / "raw" / "MQuAKE" / "datasets" / "MQuAKE-CF.json", encoding="utf-8")]:
+    for c in json.loads((ROOT / "data" / "raw" / "MQuAKE" / "datasets" / "MQuAKE-CF.json").read_text(encoding="utf-8")):
         for j, rw in enumerate(c.get("requested_rewrite", [])):
             mq[f"mquake-cf-{c.get('case_id', '?')}-{j}"] = rw.get("question", "")
     for name in ("popular", "random", "recent"):
         p = ROOT / "data" / "raw" / "RippleEdits" / "data" / "benchmark" / f"{name}.json"
         if not p.exists():
             continue
-        for i, e in enumerate(json.loads(open(p, encoding="utf-8").read())):
+        for i, e in enumerate(json.loads(p.read_text(encoding="utf-8"))):
             orig = (e.get("edit", {}).get("original_fact") or {}).get("prompt", "")
             # Copula prompts: cut the old object after the last " is ".
             if " is " in orig:
