@@ -2,22 +2,30 @@
  "retrieval_hit_rate": 0.7947,
  "n": 1500,
  "oracle": {
-  "hold": 0.17933333333333334,
+  "hold": 0.2264,
   "gen": 0.5266666666666666,
   "loc": 0.2867101416685406,
-  "n_hold": 1500,
+  "n_hold": 1197,
   "n_gen": 1500,
   "n_loc": 4447,
   "seconds": 4372.0
  },
  "real": {
-  "hold": 0.16,
+  "hold": 0.193,
   "gen": 0.4553333333333333,
   "loc": 0.28536091747245335,
-  "n_hold": 1500,
+  "n_hold": 1197,
   "n_gen": 1500,
   "n_loc": 4447,
   "seconds": 4282.3
  },
- "peak_vram_gb": 3.25
+ "peak_vram_gb": 3.25,
+ "hold_probe_fix": {
+  "before": {
+   "oracle_hold": 0.17933333333333334,
+   "real_hold": 0.16
+  },
+  "n_probes": 43509,
+  "ts": "2026-10-10T12:04:44"
+ }
 }
